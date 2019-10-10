@@ -1,0 +1,264 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700,300,600,800,400&subset=cyrillic,cyrillic-ext,latin);
+@import 'mixins'
+
+$main-color: #0055FB
+$secondary-color: #45A5FF
+$inactive-color: #C4C4C4
+$border-color: #DDDDDD
+$sucsess-color: #03A100
+$warning-color: #FF6666
+
+body
+    margin: 0px
+    background-color: #e5e5e5
+    font-family: "Open Sans", sans-serif
+    font-size: 16px
+
+.main
+    display: flex
+    width: 100%
+    height: auto
+    flex-direction: column
+    align-items: center
+
+.drop-wrapper
+    background-color: white
+    position: absolute
+    top: 0
+    bottom: 0
+    left: -5px
+    right: -5px
+    z-index: 999
+
+    &__text
+        height: 100%
+        @extend .sender__text
+
+    &__title
+        @extend .sender__title
+
+.sender
+    @include border-radius
+    display: flex
+    flex-direction: column
+    width: 70%
+    min-height: 400px
+    padding: 5px 20px
+    background-color: #fff
+    box-sizing: border-box
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1)
+
+    &__title
+        font-size: 30px
+
+    &__subtitle
+        margin: 0 10%
+
+    &__text
+        display: flex
+        flex-direction: column
+        text-align: center
+        align-items: center
+        justify-content: center
+        min-height: inherit
+
+    &__reload
+        color: $secondary-color
+        cursor: pointer
+
+    &__line
+        display: flex
+
+    &__files
+        display: flex
+        flex-wrap: wrap
+
+    &__input-block
+        display: flex
+        flex-direction: column
+        flex-basis: 50%
+        min-width: 0px
+        margin-top: 3px
+        margin-bottom: 10px
+
+    &__textarea
+        @include rounded-border
+        height: 6em
+        resize: none
+
+.sender__input
+    @include rounded-border
+    @include transparent-placeholder(0.4)
+    font-size: 18px
+    padding: 5px
+    box-sizing: border-box
+
+    &_left
+        @include different-side-round(5px, 0px)
+
+    &_right
+        @include different-side-round(0px, 5px)
+
+    &:focus
+        border-color: $secondary-color
+        outline: none
+
+.uploader
+    display: flex
+    flex-direction: row-reverse
+    justify-content: flex-end
+
+    &__input
+        opacity: 0
+
+    &__input:focus ~ &__label
+        @include rounded-border($secondary-color, 2px, 7px)
+        @include color-fill($secondary-color)
+        padding: 3px
+
+    &__label
+        @include color-fill($main-color)
+        display: flex
+        padding: 5px
+        max-width: 180px
+        align-items: baseline
+        cursor: pointer
+
+    &__label:hover
+        @include color-fill($secondary-color)
+
+    &__clip
+        width: 20px
+        height: 15px
+
+.sender__button
+    @include gradient($secondary-color, $main-color)
+    @include rounded-border($secondary-color, 2px)
+    font-size: 18px
+    margin: 20px 0px
+    color: white
+    padding: 10px 20px
+    box-shadow: 0px 0px 5px $main-color
+
+    &:hover
+        @include gradient(mix(white, $secondary-color, 15%), mix(white, $main-color, 15%))
+
+    &:active
+        @include gradient(mix(black, $secondary-color, 15%), mix(black, $main-color, 15%))
+
+    &:disabled
+        background: $inactive-color
+        border-color: $inactive-color
+        box-shadow: none
+
+.file-block
+    @include rounded-border
+    display: flex
+    align-items: center
+    flex-basis: calc(50% - 12px)
+    min-width: 0px
+    padding: 5px
+
+    &__name
+        display: flex
+        min-width: 0px
+        align-items: center
+
+    &__clip
+        flex-shrink: 0
+        margin-right: 3px
+
+    &__filename
+        @include ellipsis
+
+    &__remover
+        @include color-fill($warning-color)
+        display: inline-flex
+        align-items: center
+        margin-left: auto
+        padding-left: 5px
+        cursor: pointer
+
+
+.header
+    display: flex
+    width: 70%
+    padding: 10px
+    margin-bottom: 5px
+
+    &__logo
+        fill: $inactive-color
+
+.error-layer
+    display: flex
+    position: fixed
+    flex-direction: column-reverse
+    align-items: flex-end
+    z-index: 9999
+    width: 100%
+    height: 100vh
+    pointer-events: none
+
+    &__block
+        @include border-radius
+        width: 20%
+        padding: 20px 10px
+        margin: 5px
+        text-align: center
+        word-wrap: break-word
+        background-color: #fff
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3)
+
+.sended-messages
+    display: flex
+    width: 70%
+    flex-direction: column
+    align-items: flex-start
+    margin-bottom: 20px
+
+    &__title
+        display: flex
+        width: 100%
+        align-items: baseline
+
+    &__remover
+        color: $inactive-color
+        cursor: pointer
+        margin-left: auto
+
+    &__remover:hover
+        color: $warning-color
+
+.mails
+    display: flex
+    flex-direction: column
+    width: 100%
+
+    &__line
+        display: flex
+        justify-content: space-between
+
+    &__line_header
+        color: $inactive-color
+
+    &__row_center
+        @include ellipsis
+        flex-grow: 1
+        margin: 0px 10px
+
+    &__row_left
+        min-width: 95px
+
+    &__row_right
+        min-width: 95px
+        text-align: end
+
+.h-line
+    border-top: 1px solid $border-color
+    margin: 5px 0px
+
+.error
+    color: $warning-color
+
+.sucsess
+    color: $sucsess-color
