@@ -1,5 +1,4 @@
 import React from 'react'
-// import './file-block.css'
 import { Clip, TrashBin } from './images'
 import { connect } from 'react-redux'
 import { deleteFile } from '../actions/actionCreators'
